@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Joe's Hotdogs</title>
+<head>
+<body>
+	<h1 style="text-align: center">Welcome To Joe's Hotdogs</h1>
+	<script language="javascript">
+		var hotdogs = null;
+		var french_fries = null;
+		var sodas = null;
+		while (hotdogs == null) {
+			hotdogs = prompt("How many hotdogs would you like?", "0");
+		} 
+		while (french_fries == null) {
+			french_fries = prompt("How many orders of french fries would you like?", "0");
+		}
+		while (sodas == null) {
+			sodas = prompt("How many drinks would you like?", "0");
+		}
+		var hotdogsAmount = hotdogs * 3.25;
+		hotdogsAmount = cleanOutput(hotdogsAmount);
+		var frenchfriesAmount = french_fries * 2.00;
+		frenchfriesAmount = cleanOutput(frenchfriesAmount);
+		var sodasAmount = sodas * 1.50;
+		sodasAmount = cleanOutput(sodasAmount);
+		var subtotal = subTotal(hotdogsAmount, frenchfriesAmount, sodasAmount);
+		subtotal = cleanOutput(subtotal);
+		var discount = calculateDiscount(subtotal);
+		subtotal = parseFloat(subtotal);
+		discount = parseFloat(discount);
+		var preTaxTotal = subtotal - discount;
+		preTaxTotal = cleanOutput(preTaxTotal);
+		var tax = calculateTax(preTaxTotal);
+		preTaxTotal = parseFloat(preTaxTotal);
+		tax = parseFloat(tax);
+		var finalTotal = preTaxTotal + tax;
+		finalTotal = cleanOutput(finalTotal);
+		document.write("<p>" + hotdogs + " hotdogs ordered at $3.25 each is $" + hotdogsAmount + "</p>");
+		document.write("<p>" + french_fries + " french fries ordered at $2.00 each is $" + frenchfriesAmount + "</p>");
+		document.write("<p>" + sodas + " drinks ordered at $1.50 each is $" + sodasAmount + "</p>");
+		if (discount > 0) {
+			document.write("<p>You qualified for the 10% discount!</p>");
+		} else {
+			document.write("<p>This order is not eligible for a discount, sorry.</p>");
+		}
+		document.write("<p>Your subtotal is: $" + preTaxTotal + "</p>");
+		document.write("<p>Tax is: $" + tax + "</p>");
+		document.write("<p>Your final total is: $" + finalTotal + "</p>");
+		document.write("<p>Thank you for ordering with Joe's Hotdogs!</p>");
+
+		function subTotal(hotdogs, french_fries, sodas) {
+			hotdogs = parseFloat(hotdogs);
+			french_fries = parseFloat(french_fries);
+			sodas = parseFloat(sodas);
+			var total = hotdogs + french_fries + sodas;
+			return total;
+		}
+
+		function calculateDiscount(subtotal) {
+			if (subtotal >= 20) {
+				var discount = subtotal * 0.1;
+				discount = cleanOutput(discount);
+				return discount;
+			} else {
+				return 0;
+			}
+		}
+
+		function calculateTax(total) {
+			var taxValue = total * 0.0625;
+			taxValue = taxValue.toFixed(2);
+			return taxValue;
+		}
+		
+		function cleanOutput(input) {
+			input = parseFloat(input);
+			input = input.toFixed(2);
+			return input;
+		}
+	</script>
+</body>
+</head>
+</html>
